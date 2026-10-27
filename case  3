@@ -1,0 +1,872 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShopZone - Online Shopping</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f5f7fb;
+    color: #1e293b;
+}
+
+/* Navigation Bar */
+.navbar {
+    background: #ffffff;
+    padding: 18px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    box-shadow: 0 2px 10px #0000000d;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.logo {
+    color: #2563eb;
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.logo span {
+    color: #f97316;
+}
+
+.nav-links {
+    display: flex;
+    gap: 22px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #334155;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.nav-links a:hover {
+    color: #2563eb;
+}
+
+.search {
+    display: flex;
+    gap: 5px;
+}
+
+.search input {
+    width: 180px;
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    outline: none;
+}
+
+.search button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 14px;
+    cursor: pointer;
+}
+
+/* Promotional Banner */
+.hero {
+    margin: 28px 6%;
+    padding: 55px 45px;
+    border-radius: 18px;
+    background: linear-gradient(120deg, #172554, #2563eb);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    overflow: hidden;
+}
+
+.hero h1 {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    color: #dbeafe;
+    line-height: 1.7;
+    margin-bottom: 22px;
+}
+
+.hero .offer {
+    color: #fde68a;
+    font-weight: bold;
+}
+
+.shop-btn {
+    display: inline-block;
+    background: #f97316;
+    color: white;
+    padding: 13px 23px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero-icon {
+    font-size: 115px;
+}
+
+/* Categories */
+.container {
+    padding: 10px 6%;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 25px 0 20px;
+    gap: 12px;
+}
+
+.section-title h2 {
+    font-size: 25px;
+}
+
+.section-title a {
+    color: #2563eb;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+}
+
+.category {
+    background: white;
+    padding: 20px 10px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    transition: 0.3s;
+}
+
+.category:hover {
+    transform: translateY(-4px);
+    border-color: #2563eb;
+}
+
+.category .emoji {
+    font-size: 35px;
+    margin-bottom: 12px;
+}
+
+.category h3 {
+    font-size: 14px;
+}
+
+/* Promotional strip */
+.promo-strip {
+    margin: 35px 0 25px;
+    padding: 24px;
+    border-radius: 12px;
+    background: #ffedd5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.promo-strip h2 {
+    color: #9a3412;
+    margin-bottom: 8px;
+}
+
+.promo-strip p {
+    color: #7c2d12;
+    font-size: 14px;
+}
+
+.promo-strip a {
+    background: #ea580c;
+    color: white;
+    text-decoration: none;
+    padding: 12px 18px;
+    border-radius: 7px;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* Product Grid */
+.products {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+    margin-bottom: 35px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    transition: 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px #00000012;
+}
+
+.product-image {
+    height: 210px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    background: #f1f5f9;
+    font-size: 85px;
+}
+
+.discount {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #dc2626;
+    color: white;
+    font-size: 12px;
+    padding: 7px 9px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.product-info {
+    padding: 18px;
+}
+
+.product-info .category-name {
+    font-size: 12px;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.product-info h3 {
+    font-size: 17px;
+    margin-bottom: 9px;
+}
+
+.rating {
+    color: #f59e0b;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.rating span {
+    color: #64748b;
+}
+
+.description {
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.6;
+    min-height: 42px;
+    margin-bottom: 12px;
+}
+
+.price-row {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.price {
+    font-size: 21px;
+    font-weight: bold;
+    color: #0f172a;
+}
+
+.old-price {
+    color: #94a3b8;
+    text-decoration: line-through;
+    font-size: 13px;
+}
+
+.add-btn {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    background: #2563eb;
+    color: white;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background: #1d4ed8;
+}
+
+/* Benefits */
+.benefits {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin: 35px 0;
+}
+
+.benefit {
+    background: white;
+    border-radius: 12px;
+    padding: 25px 15px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+}
+
+.benefit .emoji {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.benefit h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+.benefit p {
+    color: #64748b;
+    font-size: 13px;
+}
+
+/* Newsletter */
+.newsletter {
+    margin: 30px 0;
+    background: #dbeafe;
+    padding: 35px 20px;
+    text-align: center;
+    border-radius: 14px;
+}
+
+.newsletter h2 {
+    margin-bottom: 10px;
+}
+
+.newsletter p {
+    color: #475569;
+    margin-bottom: 18px;
+}
+
+.newsletter form {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.newsletter input {
+    width: 300px;
+    max-width: 65%;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+}
+
+.newsletter button {
+    border: none;
+    background: #2563eb;
+    color: white;
+    border-radius: 7px;
+    padding: 12px 18px;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    background: #172554;
+    color: #cbd5e1;
+    padding: 35px 6% 20px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+footer h3 {
+    color: white;
+    margin-bottom: 14px;
+}
+
+footer p, footer a {
+    display: block;
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 2;
+}
+
+footer a:hover {
+    color: white;
+}
+
+.copyright {
+    text-align: center;
+    border-top: 1px solid #334155;
+    padding-top: 20px;
+    font-size: 13px;
+}
+
+/* Responsive design */
+@media (max-width: 1100px) {
+    .products {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .categories {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .navbar {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 750px) {
+    .navbar {
+        position: static;
+        padding: 18px 5%;
+    }
+
+    .nav-links {
+        order: 3;
+        width: 100%;
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    .search {
+        flex: 1;
+    }
+
+    .search input {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .hero {
+        margin: 18px 4%;
+        padding: 30px 22px;
+    }
+
+    .hero h1 {
+        font-size: 30px;
+    }
+
+    .hero-icon {
+        font-size: 65px;
+    }
+
+    .container {
+        padding: 10px 4%;
+    }
+
+    .products {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 13px;
+    }
+
+    .product-image {
+        height: 160px;
+        font-size: 60px;
+    }
+
+    .product-info {
+        padding: 13px;
+    }
+
+    .product-info h3 {
+        font-size: 15px;
+    }
+
+    .categories {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }
+
+    .promo-strip {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .benefits {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 430px) {
+    .logo {
+        font-size: 23px;
+    }
+
+    .hero-icon {
+        display: none;
+    }
+
+    .hero h1 {
+        font-size: 27px;
+    }
+
+    .products {
+        grid-template-columns: 1fr;
+    }
+
+    .product-image {
+        height: 210px;
+    }
+
+    .categories {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .section-title h2 {
+        font-size: 21px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="logo">Shop<span>Zone.</span></div>
+
+    <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#products">Products</a>
+        <a href="#offers">Offers</a>
+        <a href="#footer">Contact</a>
+    </div>
+
+    <form class="search" action="#products" method="get">
+        <input type="search" name="q" placeholder="Search products..."
+               aria-label="Search products">
+        <button type="submit">Search</button>
+    </form>
+</nav>
+
+<!-- Hero Banner -->
+<section class="hero" id="home">
+    <div>
+        <p class="offer">MEGA SALE • LIMITED-TIME OFFERS</p>
+        <h1>Shopping Made<br>Simple & Smart!</h1>
+        <p>Discover trending products at amazing prices.<br>
+           Find your favourites and enjoy great deals.</p>
+        <a href="#products" class="shop-btn">Shop Now →</a>
+    </div>
+    <div class="hero-icon">🛍️</div>
+</section>
+
+<main class="container">
+
+    <!-- Categories -->
+    <section id="categories">
+        <div class="section-title">
+            <h2>Shop by Category</h2>
+        </div>
+
+        <div class="categories">
+            <a href="#products" class="category" style="text-decoration:none;color:inherit">
+                <div class="emoji">📱</div>
+                <h3>Electronics</h3>
+            </a>
+
+            <a href="#products" class="category" style="text-decoration:none;color:inherit">
+                <div class="emoji">👕</div>
+                <h3>Fashion</h3>
+            </a>
+
+            <a href="#products" class="category" style="text-decoration:none;color:inherit">
+                <div class="emoji">👟</div>
+                <h3>Footwear</h3>
+            </a>
+
+            <a href="#products" class="category" style="text-decoration:none;color:inherit">
+                <div class="emoji">🎧</div>
+                <h3>Accessories</h3>
+            </a>
+
+            <a href="#products" class="category" style="text-decoration:none;color:inherit">
+                <div class="emoji">⌚</div>
+                <h3>Watches</h3>
+            </a>
+
+            <a href="#products" class="category" style="text-decoration:none;color:inherit">
+                <div class="emoji">🏠</div>
+                <h3>Home</h3>
+            </a>
+        </div>
+    </section>
+
+    <!-- Promotion -->
+    <section class="promo-strip" id="offers">
+        <div>
+            <h2>🔥 Weekend Special Sale</h2>
+            <p>Save up to 50% on selected products. Discover today's deals!</p>
+        </div>
+        <a href="#products">Explore Deals →</a>
+    </section>
+
+    <!-- Products -->
+    <section id="products">
+        <div class="section-title">
+            <h2>Trending Products</h2>
+            <a href="#products">Explore All →</a>
+        </div>
+
+        <div class="products">
+
+            <!-- Product 1 -->
+            <article class="product-card">
+                <div class="product-image">
+                    <span class="discount">-20%</span>
+                    📱
+                </div>
+                <div class="product-info">
+                    <p class="category-name">Electronics</p>
+                    <h3>Smartphone Pro</h3>
+                    <div class="rating">★★★★★ <span>(4.5)</span></div>
+                    <p class="description">A stylish smartphone with a vivid display and fast performance.</p>
+                    <div class="price-row">
+                        <span class="price">₹19,999</span>
+                        <span class="old-price">₹24,999</span>
+                    </div>
+                    <a href="#footer" class="add-btn">Shop Product</a>
+                </div>
+            </article>
+
+            <!-- Product 2 -->
+            <article class="product-card">
+                <div class="product-image">
+                    <span class="discount">-30%</span>
+                    🎧
+                </div>
+                <div class="product-info">
+                    <p class="category-name">Accessories</p>
+                    <h3>Wireless Headphones</h3>
+                    <div class="rating">★★★★★ <span>(4.7)</span></div>
+                    <p class="description">Enjoy immersive sound, comfortable ear cushions, and wireless listening.</p>
+                    <div class="price-row">
+                        <span class="price">₹1,399</span>
+                        <span class="old-price">₹1,999</span>
+                    </div>
+                    <a href="#footer" class="add-btn">Shop Product</a>
+                </div>
+            </article>
+
+            <!-- Product 3 -->
+            <article class="product-card">
+                <div class="product-image">
+                    <span class="discount">-25%</span>
+                    👟
+                </div>
+                <div class="product-info">
+                    <p class="category-name">Footwear</p>
+                    <h3>Running Sneakers</h3>
+                    <div class="rating">★★★★☆ <span>(4.2)</span></div>
+                    <p class="description">Lightweight sneakers designed for everyday comfort and casual style.</p>
+                    <div class="price-row">
+                        <span class="price">₹1,499</span>
+                        <span class="old-price">₹1,999</span>
+                    </div>
+                    <a href="#footer" class="add-btn">Shop Product</a>
+                </div>
+            </article>
+
+            <!-- Product 4 -->
+            <article class="product-card">
+                <div class="product-image">
+                    <span class="discount">-15%</span>
+                    ⌚
+                </div>
+                <div class="product-info">
+                    <p class="category-name">Watches</p>
+                    <h3>Smart Watch</h3>
+                    <div class="rating">★★★★★ <span>(4.4)</span></div>
+                    <p class="description">A modern watch with activity tracking and a clear digital display.</p>
+                    <div class="price-row">
+                        <span class="price">₹2,549</span>
+                        <span class="old-price">₹2,999</span>
+                    </div>
+                    <a href="#footer" class="add-btn">Shop Product</a>
+                </div>
+            </article>
+
+            <!-- Product 5 -->
+            <article class="product-card">
+                <div class="product-image">
+                    <span class="discount">-40%</span>
+                    👕
+                </div>
+                <div class="product-info">
+                    <p class="category-name">Fashion</p>
+                    <h3>Casual T-Shirt</h3>
+                    <div class="rating">★★★★☆ <span>(4.1)</span></div>
+                    <p class="description">A versatile cotton T-shirt suitable for everyday wear.</p>
+                    <div class="price-row">
+                        <span class="price">₹599</span>
+                        <span class="old-price">₹999</span>
+                    </div>
+                    <a href="#footer" class="add-btn">Shop Product</a>
+                </div>
+            </article>
+
+            <!-- Product 6 -->
+            <article class="product-card">
+                <div class="product-image">
+                    <span class="discount">-20%</span>
+                    💻
+                </div>
+                <div class="product-info">
+                    <p class="category-name">Electronics</p>
+                    <h3>Laptop</h3>
+                    <div class="rating">★★★★★ <span>(4.6)</span></div>
+                    <p class="description">A versatile laptop for programming, productivity, and entertainment.</p>
+                    <div class="price-row">
+                        <span class="price">₹49,999</span>
+                        <span class="old-price">₹62,499</span>
+                    </div>
+                    <a href="#footer" class="add-btn">Shop Product</a>
+                </div>
+            </article>
+
+            <!-- Product 7 -->
+            <article class="product-card">
+                <div class="product-image">
+                    <span class="discount">-35%</span>
+                    🎒
+                </div>
+                <div class="product-info">
+                    <p class="category-name">Accessories</p>
+                    <h3>Travel Backpack</h3>
+                    <div class="rating">★★★★☆ <span>(4.3)</span></div>
+                    <p class="description">A practical backpack with multiple compartments for daily essentials.</p>
+                    <div class="price-row">
+                        <span class="price">₹974</span>
+                        <span class="old-price">₹1,499</span>
+                    </div>
+                    <a href="#footer" class="add-btn">Shop Product</a>
+                </div>
+            </article>
+
+            <!-- Product 8 -->
+            <article class="product-card">
+                <div class="product-image">
+                    <span class="discount">-10%</span>
+                    🕶️
+                </div>
+                <div class="product-info">
+                    <p class="category-name">Fashion</p>
+                    <h3>Classic Sunglasses</h3>
+                    <div class="rating">★★★★☆ <span>(4.0)</span></div>
+                    <p class="description">Classic everyday sunglasses with a modern, lightweight design.</p>
+                    <div class="price-row">
+                        <span class="price">₹899</span>
+                        <span class="old-price">₹999</span>
+                    </div>
+                    <a href="#footer" class="add-btn">Shop Product</a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="benefits">
+        <div class="benefit">
+            <div class="emoji">🚚</div>
+            <h3>Free Delivery</h3>
+            <p>Free shipping on eligible orders.</p>
+        </div>
+
+        <div class="benefit">
+            <div class="emoji">🔒</div>
+            <h3>Secure Shopping</h3>
+            <p>Shop with confidence and care.</p>
+        </div>
+
+        <div class="benefit">
+            <div class="emoji">↩️</div>
+            <h3>Easy Returns</h3>
+            <p>Returns according to store policy.</p>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <h2>Join the ShopZone Community</h2>
+        <p>Stay informed about new arrivals and special offers.</p>
+
+        <form action="#footer" method="get">
+            <input type="email" name="email"
+                   placeholder="Enter your email address"
+                   aria-label="Email address" required>
+            <button type="submit">Subscribe</button>
+        </form>
+    </section>
+
+</main>
+
+<!-- Footer -->
+<footer id="footer">
+    <div class="footer-grid">
+        <div>
+            <h3>ShopZone.</h3>
+            <p>Your destination for everyday shopping.</p>
+            <p>Discover products and great deals in one place.</p>
+        </div>
+
+        <div>
+            <h3>Quick Links</h3>
+            <a href="#home">Home</a>
+            <a href="#categories">Categories</a>
+            <a href="#products">Products</a>
+            <a href="#offers">Special Offers</a>
+        </div>
+
+        <div>
+            <h3>Customer Support</h3>
+            <p>Email: support@example.com</p>
+            <p>Phone: +91 98765 43210</p>
+            <p>Monday - Saturday</p>
+        </div>
+    </div>
+
+    <div class="copyright">
+        © 2026 ShopZone. All rights reserved.
+    </div>
+</footer>
+
+</body>
+</html>
